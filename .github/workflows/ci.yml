@@ -1,0 +1,28 @@
+
+# on defines the branches that trigger the workflow
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build-and-test:
+    # VM for running
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install code on the VM
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js for the VM
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
