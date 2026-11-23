@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install code on the VM
+      - name: Checkout the code
         uses: actions/checkout@v4
 
       - name: Set up Node.js for the VM
