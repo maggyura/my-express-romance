@@ -1,16 +1,15 @@
+// Modules
 const express = require('express');
-// module path so that we don't use Absolute Path for rendering html
-const path = require('path');
+const path = require('path');// module path so that we don't use Absolute Path for rendering html
 const http = require('http');
 const app = express();
-
+const logger = require('morgan') //logger middleware
+// ---
 const port = 1000;
 
 //logging middleware
-app.use(function (req,res,next){
-    console.log("Incoming request to"+req.url+"with a request method "+req.method);
-    next();
-});
+app.use(logger("short"));
+
 
 /*
 Just having fun with testing how middleware works
