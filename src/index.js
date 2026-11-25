@@ -30,6 +30,8 @@ app.use(function (req,res){
     res.sendFile(path.join(__dirname,"main.html"));
 })
 
-http.createServer(app).listen(port); // app returns reqHandler function so it can be used with http.createServer
+if(require.main === module){
+    http.createServer(app).listen(port); // app returns reqHandler function so it can be used with http.createServer
+}
 
 module.exports = app;
