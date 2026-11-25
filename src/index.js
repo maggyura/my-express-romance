@@ -5,7 +5,7 @@ const http = require('http');
 const app = express();
 const logger = require('morgan') //logger middleware
 // ---
-const port = 1000;
+const port = 2000;
 
 //logging middleware
 app.use(logger("short"));
