@@ -3,10 +3,12 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 
 import { LoginForm } from './Login.jsx'
+import { Register } from './Register.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* сюда будем подключать страницы */}
-    <LoginForm />
+    {/* here insert pages */}
+      {/* <LoginForm /> */}
+    <Register />
   </StrictMode>,
 )
