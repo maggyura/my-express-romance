@@ -1,14 +1,15 @@
 import { useState } from 'react';
 
-export function RegistrationForm() {
+export function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     return (
-        <form className={'RegistrationForm'} onSubmit={e => {
+        <form className={'LoginForm'} onSubmit={e => {
       e.preventDefault();
+      console.log(email, password);
     }}>
-            <h1>Register here!</h1>
+            <h1>Log In!</h1>
             <p>You can create your account via email now.
                 Or you can enter to already existing account using your password.</p>
         <div>
@@ -18,7 +19,7 @@ export function RegistrationForm() {
 
         <div>
             <label htmlFor="password">Password:</label>
-            <input type='password' id="password" name="password" minLength={8} onChange={e => setPassword(e.target.value)} required/>
+            <input type='password' id="password" name="password" onChange={e => setPassword(e.target.value)} required/>
         </div>
             <input type="submit" value="Sign in" />
         </form>
