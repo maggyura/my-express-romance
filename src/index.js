@@ -1,21 +1,29 @@
+// Modules
 const express = require('express');
-
-// module path so that we don't use Absolute Path for rendering html
-const path = require('path');
-
+const path = require('path');// module path so that we don't use Absolute Path for rendering html
+const http = require('http');
 const app = express();
-const port = 1000;
+const logger = require('morgan') //logger middleware
+// ---
+const port = 2000;
 
-app.get('/', (req, res)=>{
+let pathToSrc = path.resolve(__dirname,"public");
 
-    res.sendFile(path.join(__dirname,'main.html')); //__dirname is needed cuz we all have different absolute paths
-})
-// this if statement checks, if the file was ran from this file directly ot from the other? (test.js)
+//logging middleware
+app.use(logger("short"));
+// statics from public folder. It will be replaced by React folders
+app.use(express.static(pathToSrc, {
+    index: "main.html",
+    extensions: ["html"]
+}));
+
+app.use(function(req,res){
+    res.statusCode = 404;
+    res.end("Can't find that");
+});
+
 if(require.main === module){
-    app.listen(port, ()=>{
-    console.log("Server is ON.");
-})
+    http.createServer(app).listen(port); // app returns reqHandler function so it can be used with http.createServer
 }
 
-//When asked to export ( basically, require('index.js') ), this file will export *app* value
 module.exports = app;
