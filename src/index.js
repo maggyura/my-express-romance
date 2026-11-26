@@ -7,28 +7,20 @@ const logger = require('morgan') //logger middleware
 // ---
 const port = 2000;
 
+let pathToSrc = path.resolve(__dirname,"public");
+
 //logging middleware
 app.use(logger("short"));
+// statics from public folder. It will be replaced by React folders
+app.use(express.static(pathToSrc, {
+    index: "main.html",
+    extensions: ["html"]
+}));
 
-
-/*
-Just having fun with testing how middleware works
-
-app.use(function(req,res,next){
-    let minute = (new Date().getMinutes());
-    if((minute%2) === 0){
-        next();
-    }
-    else{
-        res.statusCode = 403;
-        res.end("Not authorized");
-    }
-})*/
-
-
-app.use(function (req,res){
-    res.sendFile(path.join(__dirname,"main.html"));
-})
+app.use(function(req,res){
+    res.statusCode = 404;
+    res.end("Can't find that");
+});
 
 if(require.main === module){
     http.createServer(app).listen(port); // app returns reqHandler function so it can be used with http.createServer
